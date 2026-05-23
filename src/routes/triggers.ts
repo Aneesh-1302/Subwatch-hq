@@ -35,7 +35,7 @@ triggers.post('/on-mod-action', async (c) => {
 
   await Promise.all([
     redis.incrBy('friction:total', 1),
-    redis.incrBy(`friction:flair:${flair}`, 1),
+    redis.hIncrBy(`friction:flairs`,flair, 1),
     redis.incrBy(`friction:hour:${hour}`, 1),
     redis.incrBy(`friction:day:${day}`, 1),
   ]);
