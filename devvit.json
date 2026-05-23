@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "subwatch-hq",
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Open SubWatch Dashboard",
+        "description": "View AutoModerator false positive analytics for this subreddit.",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/create-dashboard"
+      }
+    ]
+  },
+  "triggers": {
+    "onModAction": "/internal/triggers/on-mod-action"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "permissions": {
+    "reddit": true
+  },
+  "dev": {
+    "subreddit": "subwatch_hq_dev"
+  }
+}
