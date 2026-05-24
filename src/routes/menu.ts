@@ -9,7 +9,7 @@ menu.post('/create-dashboard', async (c) => {
 
     await reddit.submitCustomPost({
       subredditName: subreddit.name,
-      title: '📊 SubWatch HQ — AutoMod Observability Dashboard',
+      title: 'SubWatch HQ — AutoMod Observability Dashboard',
       textFallback: { text: 'SubWatch HQ — AutoMod false positive analytics.' },
     });
 
