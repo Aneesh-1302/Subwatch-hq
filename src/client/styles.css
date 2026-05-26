@@ -147,6 +147,19 @@ html, body {
   letter-spacing: 0.05em;
 }
 
+.status-divider {
+  color: rgba(52, 211, 153, 0.3);
+  font-size: 11px;
+  margin: 0 2px;
+}
+
+.status-timezone {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.02em;
+}
+
 /* ---------- Hero Card (Top Offender) ---------- */
 #hero-section {
   position: relative;

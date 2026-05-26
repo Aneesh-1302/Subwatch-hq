@@ -75,6 +75,7 @@ const dom = {
   btnCopy: $<HTMLButtonElement>('btn-copy'),
   copyLabel: $<HTMLSpanElement>('copy-label'),
   modalClose: $<HTMLButtonElement>('modal-close'),
+  statusTimezone: $<HTMLSpanElement>('status-timezone'),
 };
 
 // ─── State ──────────────────────────────────────────────────────────
@@ -170,7 +171,12 @@ function formatHour(hour: string): string {
   const localHour = d.getHours();
   const period = localHour >= 12 ? 'PM' : 'AM';
   const display = localHour === 0 ? 12 : localHour > 12 ? localHour - 12 : localHour;
-  return `${display}:00 ${period}`;
+  
+  // Detect short timezone name (e.g. IST, EST)
+  const tzAbbr = new Date().toLocaleTimeString(undefined, { timeZoneName: 'short' }).split(' ').pop() || '';
+  const tzSuffix = tzAbbr ? ` (${tzAbbr})` : '';
+  
+  return `${display}:00 ${period}${tzSuffix}`;
 }
 
 function renderDashboard(data: DashboardData): void {
@@ -411,6 +417,18 @@ function renderAccessDenied(): void {
 
 async function init(): Promise<void> {
   console.log('[ModOps] Dashboard initializing...');
+
+  // Set local timezone in header
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const tzAbbr = new Date().toLocaleTimeString(undefined, { timeZoneName: 'short' }).split(' ').pop() || '';
+    const tzText = tzAbbr ? `${tzAbbr} (${tz})` : tz;
+    if (dom.statusTimezone) {
+      dom.statusTimezone.textContent = tzText;
+    }
+  } catch (e) {
+    console.warn('[ModOps] Failed to resolve local timezone:', e);
+  }
 
   try {
     const data = await fetchDashboardData();
