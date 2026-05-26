@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developers.reddit.com/schema/config-file.v1.json",
+  "name": "modopsapp",
+  "server": {
+    "dir": "dist/server",
+    "entry": "index.cjs"
+  },
+  "post": {
+    "dir": "dist/client",
+    "entrypoints": {
+      "default": {
+        "entry": "index.html",
+        "inline": true,
+        "height": "tall"
+      }
+    }
+  },
+  "menu": {
+    "items": [
+      {
+        "label": "Create SubWatch Dashboard",
+        "description": "Create a SubWatch observability dashboard post in this subreddit.",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/create-dashboard"
+      },
+      {
+        "label": "Seed Demo Data",
+        "description": "Populate the dashboard with realistic demo data for presentation.",
+        "location": "subreddit",
+        "forUserType": "moderator",
+        "endpoint": "/internal/menu/seed-demo-data"
+      }
+    ]
+  },
+  "triggers": {
+    "onModAction": "/internal/triggers/on-mod-action"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "permissions": {
+    "reddit": true
+  }
+}
