@@ -23,13 +23,6 @@
         "location": "subreddit",
         "forUserType": "moderator",
         "endpoint": "/internal/menu/create-dashboard"
-      },
-      {
-        "label": "Seed Demo Data",
-        "description": "Populate the dashboard with realistic demo data for presentation.",
-        "location": "subreddit",
-        "forUserType": "moderator",
-        "endpoint": "/internal/menu/seed-demo-data"
       }
     ]
   },
